@@ -25,9 +25,9 @@ class Tableau1 extends Phaser.Scene {
         // Balle
         this.balle = this.physics.add.image(this.largeur / 2, this.hauteur / 2, 'cercle').setOrigin(0, 0);
         this.balle.setDisplaySize(20, 20)
-        this.balle.body.setBounce(1.1, 1.1)
+        this.balle.body.setBounce(1.5, 1.5)
         this.balle.setVelocityX(Phaser.Math.Between(200, -200))
-        this.balle.setVelocityY(Phaser.Math.Between(200, -200))
+        this.balle.setVelocityY(Phaser.Math.Between(0, 10))
         this.balle.body.setMaxVelocity(500, 500)
 
         // Raquette droite
@@ -44,13 +44,36 @@ class Tableau1 extends Phaser.Scene {
         this.gauche.setImmovable(true)
         this.gauche.body.setMaxVelocityY(200, -200)
 
+        let me = this;
         this.physics.add.collider(this.balle, this.bas)
         this.physics.add.collider(this.balle, this.haut)
-        this.physics.add.collider(this.balle, this.droite)
-        this.physics.add.collider(this.balle, this.gauche)
+        this.physics.add.collider(this.balle, this.droite, function () {
+            console.log("touchedroit")
+            me.rebond(me.droite);
+        });
+        this.physics.add.collider(this.balle, this.gauche, function (){
+            console.log("touchegauche")
+            me.rebond(me.gauche);
+        });
         this.physics.add.collider(this.droite, this.bas)
         this.physics.add.collider(this.haut, this.droite)
+
+
         this.initKeyboard();
+
+    }
+
+    rebond(raquette)
+    {
+        let hauteurRaquette = raquette.displayHeight;
+
+        let positionRelativeRaquette = (this.balle.y - raquette.y);
+
+        positionRelativeRaquette = (positionRelativeRaquette / hauteurRaquette)
+        positionRelativeRaquette = positionRelativeRaquette*2-1;
+
+        this.balle.setVelocityY(this.balle.body.velocity.y + positionRelativeRaquette * 50);
+
     }
 
 
@@ -122,5 +145,4 @@ class Tableau1 extends Phaser.Scene {
          */
 
     }
-
 }
