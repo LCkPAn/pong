@@ -1,9 +1,15 @@
 body{
     font-family: Arial, sans-serif;
     font-size: 12px;
-    background-color: #000000;
     text-align: center;
+    background-color: firebrick;
+    background-image: url(https://image.noelshack.com/fichiers/2022/03/5/1642803635-nintendo.jpg);
+    background-position: 51% 49%;
+    background-repeat: no-repeat;
+    padding: 0;
+
 }
+
 a{
     color: #808080;
     text-transform: uppercase;
@@ -23,8 +29,31 @@ a:visited{
     justify-content: center;
     align-items: center;
     min-height: 90vh;
-
 }
+
 canvas{
     outline: 1px solid #333;
+}
+
+#scores{
+    color: #ffffff;
+    font-size : 5vw;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+
+
+.score{
+    color:#0f0
+}
+.name{
+    font-size: 3vw;
+}
+
+#scores >* {
+    margin: 1vw;
 }
