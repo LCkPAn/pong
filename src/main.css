@@ -3,7 +3,7 @@ body{
     font-size: 12px;
     text-align: center;
     background-color: firebrick;
-    background-image: url(https://image.noelshack.com/fichiers/2022/03/5/1642803635-nintendo.jpg);
+    background-image: url(https://image.noelshack.com/fichiers/2022/03/7/1642964490-nintendo.jpg);
     background-position: 51% 49%;
     background-repeat: no-repeat;
     padding: 0;
@@ -41,17 +41,18 @@ canvas{
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 0;
+    top: 10px;
     width: 100%;
 }
 
 
 
 .score{
-    color:#0f0
+    color:#880000;
+    width: 10%
 }
 .name{
-    font-size: 3vw;
+    font-size: 2vw;
 }
 
 #scores >* {
