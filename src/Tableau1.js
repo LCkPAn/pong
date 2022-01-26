@@ -7,7 +7,9 @@ class Tableau1 extends Phaser.Scene{
         this.load.image('circle','assets/cercle.png');
         this.load.image('barre' , 'assets/barre.png');
         this.load.image('barre1', 'assets/barre1.png');
-        this.load.image('nintendo' , 'assets/nintendo.png')
+        this.load.image('nintendo' , 'assets/nintendo.png');
+        this.load.image('middle', 'assets/Middle.jpg');
+        this.load.image('vide', 'assets/fonds.png')
     }
 
     create(){
@@ -25,16 +27,17 @@ class Tableau1 extends Phaser.Scene{
         this.balle.body.setBounce(1,1);
         this.balle.body.setAllowGravity(false)
 
+        this.add.image(500,250, 'vide')
+
         this.haut = this.physics.add.sprite(50, -30, 'square').setOrigin(0, 0)
-        this.haut.body.setAllowGravity(false)
         this.haut.setImmovable(true);
         this.bas = this.physics.add.sprite(50, 500, 'square').setOrigin(0, 0)
-        this.bas.body.setAllowGravity(false)
         this.bas.setImmovable(true);
         this.player1 = this.physics.add.image(50, 360, 'barre1')
         this.player1.body.setAllowGravity(false)
         this.player2 = this.physics.add.image(920, 360, 'barre')
         this.player2.body.setAllowGravity(false)
+
         this.player1.setImmovable(true)
         this.player2.setImmovable(true)
 
@@ -62,12 +65,42 @@ class Tableau1 extends Phaser.Scene{
         this.player1Speed = 0
         this.player2Speed = 0
 
+
+        this.staticBlock = this.physics.add.sprite( 500, 50, 'middle');
+        this.staticBlock.body.setAllowGravity(false);
+        this.staticBlock.setImmovable(true);
+        this.physics.add.collider(this.balle, this.staticBlock,function() {me.rebond(me.staticBlock)});
+
+
         this.joueurGauche = new Joueur('Gunpei', 'joueurGauche')
         this.joueurDroite = new Joueur('Yokoi','joueurDroite')
         console.log(this.joueurGauche)
 
         this.balleAucentre();
-        this.initKeyboard()
+        this.initKeyboard();
+
+        this.lock=0
+
+        this.timerepeat();
+    }
+
+    movemid(){
+        if(this.lock==0)
+        {this.staticBlock.y+=100
+        }
+
+        if(this.lock==1)
+        {this.staticBlock.y-=100
+        }
+
+
+}
+   timerepeat(){
+        this.time.addEvent({
+            delay: 500,
+            repeat: -1,
+            callback: () => {this.movemid()},
+        })
     }
 
     rebond(players){
@@ -114,6 +147,12 @@ class Tableau1 extends Phaser.Scene{
         }
         this.player1.y += this.player1Speed
         this.player2.y += this.player2Speed
+
+        if(this.staticBlock.y>=450)
+        {this.lock=1}
+
+        if(this.staticBlock.y<=50)
+        {this.lock=0}
     }
 
     initKeyboard(){
