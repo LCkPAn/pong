@@ -22,12 +22,14 @@ class Tableau1 extends Phaser.Scene{
         this.speedY = Phaser.Math.Between(-500, 500)
         this.maxspeed = 500
 
+        this.add.image(500,250, 'vide')
+
         this.balle = this.physics.add.sprite(this.largeur/2, this.hauteur/2, 'circle')
         this.balle.setDisplaySize(20, 20)
         this.balle.body.setBounce(1,1);
         this.balle.body.setAllowGravity(false)
 
-        this.add.image(500,250, 'vide')
+
 
         this.haut = this.physics.add.sprite(50, -30, 'square').setOrigin(0, 0)
         this.haut.setImmovable(true);
@@ -37,6 +39,8 @@ class Tableau1 extends Phaser.Scene{
         this.player1.body.setAllowGravity(false)
         this.player2 = this.physics.add.image(920, this.hauteur/2, 'barre')
         this.player2.body.setAllowGravity(false)
+
+
 
         this.player1.setImmovable(true)
         this.player2.setImmovable(true)
@@ -70,6 +74,8 @@ class Tableau1 extends Phaser.Scene{
         this.staticBlock.body.setAllowGravity(false);
         this.staticBlock.setImmovable(true);
         this.physics.add.collider(this.balle, this.staticBlock,function() {me.rebond(me.staticBlock)});
+
+
 
 
         this.joueurGauche = new Joueur('Gunpei', 'joueurGauche')
