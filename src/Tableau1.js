@@ -33,9 +33,9 @@ class Tableau1 extends Phaser.Scene{
         this.haut.setImmovable(true);
         this.bas = this.physics.add.sprite(50, 500, 'square').setOrigin(0, 0)
         this.bas.setImmovable(true);
-        this.player1 = this.physics.add.image(50, 360, 'barre1')
+        this.player1 = this.physics.add.image(50, this.hauteur/2, 'barre1')
         this.player1.body.setAllowGravity(false)
-        this.player2 = this.physics.add.image(920, 360, 'barre')
+        this.player2 = this.physics.add.image(920, this.hauteur/2, 'barre')
         this.player2.body.setAllowGravity(false)
 
         this.player1.setImmovable(true)
